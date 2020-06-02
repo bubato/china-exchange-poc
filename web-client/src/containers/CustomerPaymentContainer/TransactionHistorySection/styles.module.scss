@@ -1,0 +1,26 @@
+.status {
+  font-weight: bold !important;
+}
+
+.tableRow {
+  cursor: pointer;
+}
+
+.box {
+  width: 500px;
+  padding: 0 25px
+}
+
+.qrCode {
+  text-align: center;
+  margin-top: 10px;
+  img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+  }
+}
+
+.btnGroup {
+  padding: 20px !important;
+}

@@ -1,0 +1,21 @@
+.loginBox {
+  background-color: #ffffff;
+  border: solid 1px grey;
+  border-radius: 5px;
+}
+
+.greyText {
+  color: grey;
+
+  .linkSignUp {
+    display: inline;
+    color: rgba(0, 0, 0, 0.87)!important;
+    margin-left: 0.5rem;
+    font-size: 14px;
+  }
+}
+
+.link {
+  display: block;
+  color: white;
+}

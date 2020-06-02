@@ -1,0 +1,60 @@
+.paper {
+    text-align: center;
+}
+
+.card {
+    min-height: 150px;
+}
+
+.cardContent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btnContainer {
+    min-height: 110px;
+    align-items: center;
+    display: flex;
+}
+
+.startDate {
+    margin-right: 20px !important 
+}
+
+.tableAction {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.dateContainer {
+    justify-content: flex-end;
+}
+
+.btnGroup {
+    align-items: flex-end;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.btn {
+    margin-right: 10px !important;
+    min-width: 100px !important;
+}
+
+.modal {
+    min-width: 350px;
+}
+
+.tabs {
+    width: 850px;
+}
+
+.form {
+    width: 400px;
+    padding: 20px;
+}
+
+.status {
+    font-weight: bold !important;
+}

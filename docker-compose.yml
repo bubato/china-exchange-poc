@@ -1,0 +1,32 @@
+version: "3.4"
+services:
+  #--------------------------------Services------------------------------------------
+  server:
+    build:
+      context: ./.
+      args:
+        - SWAGGER_ENV=production
+        - SWAGGER_SERVER_URL=http://localhost:3000/api
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://admin:Admin%40123@exchange-mongo:27017/china_exchange?authSource=admin
+      - SWAGGER_ENV
+    networks:
+      - exchange_poc
+
+  mongo:
+    image: mongo
+    container_name: exchange-mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: Admin@123
+    networks:
+      - exchange_poc
+
+networks:
+  exchange_poc:
+    driver: bridge

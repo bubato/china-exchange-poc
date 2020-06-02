@@ -1,0 +1,715 @@
+openapi: 3.0.1
+info:
+  title: China Exchange POC
+  description: >-
+    This is a sample server China Exchange POC server.  You can find out more
+    about     Swagger at [http://swagger.io](http://swagger.io) or on
+    [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample,
+    you should get the access token and use [Authorize] button for try out
+    authenticated routes
+  version: 0.0.3
+externalDocs:
+  description: Find out more about Swagger
+  url: "http://swagger.io"
+servers:
+  - url: "http://localhost:3000/api"
+tags:
+  - name: Access Token
+    description: Get Your DEMO access token
+  - name: Payment Method
+    description: Get and add payment method to system
+  - name: Payment Account
+    description: Get and add payment account to system
+  - name: Transaction
+    description: "Create, submit, approve or reject transaction"
+  - name: Authentication
+    description: "Login to the system"
+  - name: Admin
+    description: "Admin specific functions"
+  - name: User
+    description: "Ultilities API for user"
+  - name: Customer
+    description: "API for customer, API key required"
+paths:
+  /admin/dashboard:
+    get:
+      tags:
+        - Dashboard
+      summary: Get admin dashboard informations, admin role required
+      operationId: getAdminDashboard
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: get token success
+          content: {}
+  /merchandiser/dashboard:
+    get:
+      tags:
+        - Dashboard
+      summary: Get merchandiser dashboard informations, merchandiser role required
+      operationId: getMerchandiserDashboard
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: get token success
+          content: {}
+  /agency/dashboard:
+    get:
+      tags:
+        - Dashboard
+      summary: Get agency dashboard informations, agency role required
+      operationId: getAgencyDashboard
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: get token success
+          content: {}
+  /accessToken:
+    get:
+      deprecated: true
+      tags:
+        - Access Token
+      summary: Get your demo access token
+      operationId: getAccessToken
+      responses:
+        "200":
+          description: get token success
+          content: {}
+  /current_user:
+    get:
+      tags:
+        - User
+      summary: Get current user informations
+      operationId: getCurrentUser
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: get token success
+          content: {}
+
+  /customer/current_merchandiser:
+    get:
+      tags:
+        - User
+        - Customer
+      summary: Get current user informations, API key required
+      operationId: getCurrentMerchandiser
+      security:
+        - ApiKeyAuth: []
+      responses:
+        "200":
+          description: get token success
+          content: {}
+
+  /login:
+    post:
+      tags:
+        - Access Token
+        - Authentication
+      summary: Sign in to the system with username password
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginFormBody"
+      responses:
+        "200":
+          description: get token success
+          content: {}
+  /users:
+    post:
+      tags:
+        - Admin
+      summary: Create User, admin role required
+      operationId: createUser
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserBody"
+      responses:
+        "200":
+          description: create user success
+          content: {}
+  /users/{id}/add_roles:
+    put:
+      tags:
+        - Admin
+      summary: Add roles to user, admin role required
+      operationId: addRolesToUser
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roles:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "200":
+          description: add roles to user success
+          content: {}
+  /users/{id}/remove_roles:
+    put:
+      tags:
+        - Admin
+      summary: Remove roles from user, admin role required
+      operationId: removeRolesFromUser
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roles:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "200":
+          description: remove roles from user success
+          content: {}
+  /customer/payment-method-avaibilities:
+    summary: payment methods avaibilities
+    get:
+      summary: Get all payment methods with avaibilities, API key required
+      description: ""
+      security:
+        - ApiKeyAuth: []
+      operationId: getPaymentMethodAvaibilities
+      responses:
+        "200":
+          description: success
+      tags:
+        - Payment Method
+        - Customer
+  /payment-methods:
+    summary: payment methods
+    get:
+      summary: Get all payment methods, admin role required
+      description: ""
+      security:
+        - BearerAuth: []
+      operationId: getPaymentMethods
+      responses:
+        "200":
+          description: success
+      tags:
+        - Payment Method
+        - Admin
+    post:
+      summary: Create new payment method, admin role required
+      description: ""
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePaymentMethodBody"
+      operationId: createPaymentMethod
+      responses:
+        "201":
+          description: created
+      tags:
+        - Payment Method
+        - Admin
+  /payment-accounts:
+    summary: Payment Accounts in the system
+    get:
+      summary: Get all payment accounts in the systems, admin role required
+      description: ""
+      security:
+        - BearerAuth: []
+      operationId: getPaymentAccounts
+      responses:
+        "200":
+          description: success
+      tags:
+        - Payment Account
+        - Admin
+    post:
+      summary: Create A New Payment Account, admin role required
+      description: ""
+      operationId: createPaymentAccount
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/CreatePaymentAccountBody"
+      responses:
+        "201":
+          description: created
+      tags:
+        - Payment Account
+        - Admin
+  /admin/transactions:
+    summary: Where you create payment
+    get:
+      summary: Get all transactions or by status, admin role required
+      parameters:
+        - in: query
+          name: statuses
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: limit
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: number
+      security:
+        - BearerAuth: []
+      description: ""
+      operationId: getTransactions
+      responses:
+        "200":
+          description: success
+      tags:
+        - Transaction
+        - Admin
+  /customer/transactions:
+    summary: Where you create payment
+    get:
+      summary: Get all transactions or by status, API key required
+      parameters:
+        - in: query
+          name: statuses
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: limit
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: customerId
+          required: true
+          schema:
+            type: string
+      security:
+        - ApiKeyAuth: []
+      description: ""
+      operationId: getBuyerTransactions
+      responses:
+        "200":
+          description: success
+      tags:
+        - Transaction
+        - Customer
+  /agency/transactions:
+    summary: Where you create payment
+    get:
+      summary: Get all transactions or by status, agency role required
+      parameters:
+        - in: query
+          name: statuses
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: limit
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: number
+      security:
+        - BearerAuth: []
+      description: ""
+      operationId: getAgencyTransactions
+      responses:
+        "200":
+          description: success
+      tags:
+        - Transaction
+  /merchandiser/transactions:
+    summary: Where you crud transactions
+    get:
+      summary: Get all transactions or by status, agency role required
+      parameters:
+        - in: query
+          name: statuses
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: limit
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: number
+      security:
+        - BearerAuth: []
+      description: ""
+      operationId: getMerchandiserTransactions
+      responses:
+        "200":
+          description: success
+      tags:
+        - Transaction
+  /transactions:
+    post:
+      summary: Create a new payment transaction, API key required
+      description: ""
+      security:
+        - ApiKeyAuth: []
+      operationId: createTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTransactionBody"
+      responses:
+        "201":
+          description: created
+      tags:
+        - Transaction
+        - Customer
+  "/transactions/{id}":
+    get:
+      summary: Get transaction status
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      security:
+        - BearerAuth: []
+      description: ""
+      operationId: getTransactionStatus
+      responses:
+        "200":
+          description: success
+      tags:
+        - Transaction
+  "/transactions/{id}/submit":
+    put:
+      summary: Submit transaction, API key required
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                senderAccountInfo:
+                  type: string
+      security:
+        - ApiKeyAuth: []
+      description: ""
+      operationId: submitTransaction
+      responses:
+        "200":
+          description: success
+      tags:
+        - Transaction
+        - Customer
+  "/transactions/{id}/approve":
+    put:
+      summary: Approve transaction, admin role required
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      security:
+        - BearerAuth: []
+      description: ""
+      operationId: approveTransaction
+      responses:
+        "200":
+          description: success
+      tags:
+        - Transaction
+        - Admin
+  "/transactions/{id}/reject":
+    put:
+      summary: Reject transaction, admin role required
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+      security:
+        - BearerAuth: []
+      description: ""
+      operationId: rejectTransaction
+      responses:
+        "200":
+          description: success
+      tags:
+        - Transaction
+        - Admin
+  "/admin/consumerWebhooks":
+    summary: Manage consumer's webhook
+    get:
+      summary: Get all consumer webhook in admin, required admin role
+      security:
+        - BearerAuth: []
+      description: ""
+      operationId: getConsumerWebhook
+      responses:
+        "200":
+          description: success
+      tags:
+        - Admin
+    post:
+      summary: Create a new webhook for consumer, required admin role
+      description: ""
+      security:
+        - BearerAuth: []
+      operationId: createConsumerWebhooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConsumerWebhook"
+      responses:
+        "201":
+          description: created
+      tags:
+        - Admin
+  "/admin/consumerWebhooks/{id}":
+    summary: Manage consumer's webhook
+    put:
+      summary: Update a registed webhook, required admin role
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      security:
+        - BearerAuth: []
+      description: ""
+      operationId: editConsumerWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConsumerWebhook"
+      responses:
+        "200":
+          description: success
+      tags:
+        - Admin
+    delete:
+      summary: Delete a registed webhook, required admin role
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      security:
+        - BearerAuth: []
+      description: ""
+      operationId: deleteConsumerWebhook
+      responses:
+        "200":
+          description: success
+      tags:
+        - Admin
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    PaymentAccount:
+      type: object
+      properties:
+        _id:
+          type: string
+        paymentMethod:
+          type: string
+        owner:
+          type: string
+        name:
+          type: string
+        accountNo:
+          type: string
+        accountOwnerName:
+          type: string
+        dailyLimit:
+          type: number
+        dailyRequestedAmount:
+          type: number
+        qrCodeUrl:
+          type: string
+      xml:
+        name: PaymentAccount
+    CreatePaymentAccountBody:
+      type: object
+      properties:
+        paymentMethodId:
+          type: string
+        name:
+          type: string
+        accountNo:
+          type: string
+        accountOwnerName:
+          type: string
+        dailyLimit:
+          type: number
+        qrImage:
+          type: string
+          format: binary
+      xml:
+        name: CreatePaymentAccountBody
+    PaymentMethod:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+      xml:
+        name: PaymentMethod
+    CreatePaymentMethodBody:
+      type: object
+      properties:
+        name:
+          type: string
+      xml:
+        name: CreatePaymentMethodBody
+    Transaction:
+      type: object
+      properties:
+        _id:
+          type: string
+        paymentMethod:
+          type: string
+        receiverAccount:
+          type: string
+        senderAccountInfo:
+          type: string
+        amount:
+          type: string
+        merchandiser:
+          type: string
+        customerId:
+          type: string
+        status:
+          type: string
+          enum:
+            - initial
+            - submitted
+            - rejected
+            - approved
+      xml:
+        name: Transaction
+    CreateTransactionBody:
+      type: object
+      properties:
+        amount:
+          type: number
+        paymentType:
+          type: string
+        customerId:
+          type: string
+      xml:
+        name: Transaction
+    LoginFormBody:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      xml:
+        name: LoginFormBody
+    CreateUserBody:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        fullName:
+          type: string
+      xml:
+        name: CreateUserBody
+    ConsumerWebhook:
+      type: object
+      properties:
+        url:
+          type: string
+        userId:
+          type: string
+      xml:
+        name: ConsumerWebhook

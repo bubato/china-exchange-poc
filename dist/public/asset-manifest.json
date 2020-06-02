@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.00cdbe57.chunk.css",
+    "main.js": "/static/js/main.ef7d1501.chunk.js",
+    "main.js.map": "/static/js/main.ef7d1501.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.5984c6ed.js",
+    "runtime-main.js.map": "/static/js/runtime-main.5984c6ed.js.map",
+    "static/js/2.a5417e52.chunk.js": "/static/js/2.a5417e52.chunk.js",
+    "static/js/2.a5417e52.chunk.js.map": "/static/js/2.a5417e52.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.638b47bc8d3549098a377c64ab6d1106.js": "/precache-manifest.638b47bc8d3549098a377c64ab6d1106.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.00cdbe57.chunk.css.map": "/static/css/main.00cdbe57.chunk.css.map",
+    "static/js/2.a5417e52.chunk.js.LICENSE.txt": "/static/js/2.a5417e52.chunk.js.LICENSE.txt",
+    "static/media/styles.module.scss": "/static/media/background.01c74d4d.png",
+    "static/media/wechat.png": "/static/media/wechat.12ec882a.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5984c6ed.js",
+    "static/js/2.a5417e52.chunk.js",
+    "static/css/main.00cdbe57.chunk.css",
+    "static/js/main.ef7d1501.chunk.js"
+  ]
+}

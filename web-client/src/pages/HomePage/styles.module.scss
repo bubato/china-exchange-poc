@@ -1,0 +1,29 @@
+.homePage {
+  min-height: 100vh;
+  position: relative;
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  background-image: url("./background.png");
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: 50% 100%;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+  }
+
+  .pageTitle {
+    font-size: 48px;
+    border-bottom: 2px solid #2c2c2c;
+    margin: 30px;
+    max-width: 350px;
+    z-index: 1;
+  }
+}

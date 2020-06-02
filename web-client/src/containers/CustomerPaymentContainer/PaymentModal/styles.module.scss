@@ -1,0 +1,46 @@
+.modalContainer {
+  width: 500px;
+  height: auto;
+  background: #ffffff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  padding: 20px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  row-gap: 20px;
+
+  &:focus {
+    outline: none;
+  }
+
+  .modalTitle {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .qrImage {
+    justify-self: center;
+    width: 350px;
+    height: 350px;
+    align-self: center;
+    object-fit: cover;
+    margin-top: 20px;
+  }
+
+  .modalFooter {
+    margin-top: 15px;
+    justify-content: center;
+    display: flex;
+  }
+
+  .bankInformation {
+    font-size: 20px;
+  }
+
+  .imgContainer {
+    display: flex;
+    justify-content: center;
+  }
+}
